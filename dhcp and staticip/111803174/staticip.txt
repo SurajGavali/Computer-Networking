@@ -1,0 +1,99 @@
+1. 
+
+$ cat /etc/network/interfaces
+
+# interfaces(5) file used by ifup(8) and ifdown(8)
+auto lo
+iface lo inet loopback
+
+auto wlp0s20f3
+iface wlp0s20f3 inet static
+	address 192.168.43.10
+	netmask 255.255.255.0
+	gateway 192.168.43.1
+	dns-nameserver 8.8.8.8
+	
+2.
+
+$ ifconfig -a
+
+enp6s0f1: flags=4099<UP,BROADCAST,MULTICAST>  mtu 1500
+        ether 98:28:a6:3c:74:f7  txqueuelen 1000  (Ethernet)
+        RX packets 0  bytes 0 (0.0 B)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 0  bytes 0 (0.0 B)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+lo: flags=73<UP,LOOPBACK,RUNNING>  mtu 65536
+        inet 127.0.0.1  netmask 255.0.0.0
+        inet6 ::1  prefixlen 128  scopeid 0x10<host>
+        loop  txqueuelen 1000  (Local Loopback)
+        RX packets 6718  bytes 634210 (634.2 KB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 6718  bytes 634210 (634.2 KB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+wlp0s20f3: flags=4099<UP,BROADCAST,MULTICAST>  mtu 1500
+        inet 192.168.43.10  netmask 255.255.255.0  broadcast 192.168.43.255
+        ether d4:3b:04:94:ae:b7  txqueuelen 1000  (Ethernet)
+        RX packets 87697  bytes 114485474 (114.4 MB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 47868  bytes 6595227 (6.5 MB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+        
+3. route
+
+Kernel IP routing table
+Destination     Gateway         Genmask         Flags Metric Ref    Use Iface
+default         _gateway        0.0.0.0         UG    0      0        0 wlp0s20f3
+link-local      0.0.0.0         255.255.0.0     U     1000   0        0 wlp0s20f3
+192.168.43.0    0.0.0.0         255.255.255.0   U     600    0        0 wlp0s20f3
+192.168.43.0    0.0.0.0         255.255.255.0   U     600    0        0 wlp0s20f3
+
+4.host www.redhat.com
+
+www.redhat.com is an alias for ds-www.redhat.com.edgekey.net.
+ds-www.redhat.com.edgekey.net is an alias for ds-www.redhat.com.edgekey.net.globalredir.akadns.net.
+ds-www.redhat.com.edgekey.net.globalredir.akadns.net is an alias for e3396.dscx.akamaiedge.net.
+e3396.dscx.akamaiedge.net has address 23.211.197.179
+e3396.dscx.akamaiedge.net has IPv6 address 64:ff9b::17d3:c5b3
+
+5.traceroute mail.riseup.net
+
+traceroute to mail.riseup.net (198.252.153.254), 30 hops max, 60 byte packets
+ 1  * _gateway (192.168.43.253)  5.664 ms  5.815 ms
+ 2  * * *
+ 3  192.168.30.50 (192.168.30.50)  75.965 ms  75.913 ms  75.902 ms
+ 4  192.168.100.9 (192.168.100.9)  66.078 ms  71.440 ms  71.453 ms
+ 5  192.168.200.2 (192.168.200.2)  75.744 ms  72.326 ms  79.181 ms
+ 6  223.196.21.48 (223.196.21.48)  78.142 ms  72.844 ms  74.520 ms
+ 7  223.196.21.23 (223.196.21.23)  36.472 ms  48.352 ms  48.281 ms
+ 8  223.196.24.65 (223.196.24.65)  48.692 ms 223.196.24.17 (223.196.24.17)  48.385 ms  48.468 ms
+ 9  xe-5-2-6.xcr1.mar.cw.net (195.89.117.213)  238.574 ms  243.788 ms  243.817 ms
+10  ae4-xcr1.mlu.cw.net (195.2.10.85)  288.305 ms  282.581 ms ae51.xcr1.mlu.cw.net (195.2.21.186)  282.729 ms
+11  ae0-xcr1.mlb.cw.net (195.2.25.98)  282.455 ms  274.178 ms  273.553 ms
+12  be1274.rcr21.mil01.atlas.cogentco.com (130.117.14.25)  240.176 ms  245.318 ms  245.271 ms
+13  be2189.ccr21.mrs01.atlas.cogentco.com (154.54.36.69)  227.478 ms be2194.ccr22.mrs01.atlas.cogentco.com (154.54.61.29)  191.673 ms be2189.ccr21.mrs01.atlas.cogentco.com (154.54.36.69)  210.694 ms
+14  be3092.ccr41.par01.atlas.cogentco.com (130.117.49.153)  272.601 ms be3093.ccr42.par01.atlas.cogentco.com (130.117.50.165)  264.517 ms be3092.ccr41.par01.atlas.cogentco.com (130.117.49.153)  297.012 ms
+15  be12489.ccr42.lon13.atlas.cogentco.com (154.54.57.69)  296.749 ms  296.747 ms be12497.ccr41.lon13.atlas.cogentco.com (154.54.56.129)  246.635 ms
+16  be2099.ccr31.bos01.atlas.cogentco.com (154.54.82.34)  324.880 ms be2101.ccr32.bos01.atlas.cogentco.com (154.54.82.38)  325.295 ms be2099.ccr31.bos01.atlas.cogentco.com (154.54.82.34)  330.621 ms
+17  be3599.ccr21.alb02.atlas.cogentco.com (66.28.4.237)  357.152 ms be3600.ccr22.alb02.atlas.cogentco.com (154.54.0.221)  351.427 ms  344.991 ms
+18  be2879.ccr22.cle04.atlas.cogentco.com (154.54.29.173)  346.817 ms  320.064 ms  327.206 ms
+19  be2718.ccr42.ord01.atlas.cogentco.com (154.54.7.129)  308.154 ms be2717.ccr41.ord01.atlas.cogentco.com (154.54.6.221)  319.568 ms be2718.ccr42.ord01.atlas.cogentco.com (154.54.7.129)  311.696 ms
+20  be2832.ccr22.mci01.atlas.cogentco.com (154.54.44.169)  310.475 ms  304.699 ms  304.614 ms
+21  be3036.ccr22.den01.atlas.cogentco.com (154.54.31.89)  326.208 ms  326.454 ms  326.436 ms
+22  be3038.ccr32.slc01.atlas.cogentco.com (154.54.42.97)  326.250 ms  326.665 ms  326.509 ms
+23  be3284.ccr22.sea02.atlas.cogentco.com (154.54.44.73)  337.689 ms  331.804 ms be2029.ccr22.sea02.atlas.cogentco.com (154.54.86.110)  446.718 ms
+24  wren.riseup.net (198.252.153.1)  447.989 ms  450.865 ms  440.856 ms
+25  * * *
+26  * * *
+27  * * *
+28  * * *
+29  * * *
+30  * * *
+
+
+
+
+
+

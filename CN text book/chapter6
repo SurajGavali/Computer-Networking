@@ -1,0 +1,106 @@
+# The Services Provided by the Link Layer
+	
+	-Almost all link-layer protocols encapsulate each network-layer datagram within a link-layer frame before transmission over the link
+	-medium access control (MAC) (For point-to-point links that have a single sender at one end of the link and a single receiver at the other end of the link).
+	-MAC protocol is simple (or nonexistent)
+
+#how frame created--->
+
+	
+		1.On the sending side, the controller takes a datagram that has been created and stored in host memory
+
+		2.the higher layers of the protocol stack, encapsulates the datagram in a link-layer frame (filling in the frame’s various fields).
+
+		3.then transmits the frame into the communication link, following the link-access protocol.
+
+		4.On the receiving side, a controller receives the entire frame, and extracts the network-layer datagram
+
+		5.If the link layer performs error detection, then it is the sending controller that sets the error-detection bits in the frame header and it is the receiving controller that performs error detection.
+
+#Error detecting--->
+	
+		1.Single bit error
+		2.internet checksuming 
+		3.CRC
+
+#Multiple Access Links and Protocols--->
+
+	
+		1.point-to-point link
+		2.broadcast link
+
+
+		#MAC(multiple access channel) protocols:
+
+
+					1.channel partitioning:
+
+						• TDMA: time division multiple access
+						• FDMA: frequency division multiple access
+
+					2.random access:
+
+						• slotted ALOHA
+
+								• prob that given node has success in a slot = p(1-p)^N-1
+								• prob that any node has a success = Np(1-p)^N-1
+								• max efficiency: find p* that maximizes Np(1-p)^N-1
+								• for many nodes, take limit of Np*(1-p*) N-1 as N goes to infinity, gives :max efficiency = 1/e = .37
+
+
+						• Pure ALOHA
+
+								• efficiency: 18%
+								• unslotted Aloha: simpler, no synchronization
+
+
+
+
+						• CSMA
+
+								• if channel sensed idle: transmit entire frame
+								• if channel sensed busy: defer transmission
+								• human analogy: don’t interrupt others!
+
+
+						• CSMA/CD
+
+								• collisions detected within short time
+								• colliding transmissions aborted, reducing channel wastage
+								• collision detection easy in wired, difficult with wireless
+								• human analogy: the polite conversationalist
+								• better performance than ALOHA: and simple, cheap, decentralized !
+
+						• CSMA/CA
+
+								•
+								•
+								•
+
+
+
+					3.taking turns
+
+
+
+#Data-Over-Cable Service Interface Specifications (DOCSIS)--->
+
+
+			1.DOCSIS uses FDM to divide the downstream (CMTS to modem)
+			2.upstream (modem to CMTS) network segments into multiple frequency channels.
+
+
+#LAN and switches--->
+
+		1.link-layer switches do not have link-layer addresses associated with their interfaces that connect to hosts and routers
+		2.link layer address is variously called a LAN address, a physical address, or a MAC address
+		3.ARP resolves an IP address to a MAC address.
+		4.ARP resolves IP addresses only for hosts and router interfaces on the same subnet
+		5.Each host and router has an ARP table in its memory
+		6.ARP is above the link layer.
+
+
+		#SWITCHES --->
+
+				1.Filtering is the switch function
+				2.if there is no entry for the destination address, the switch broadcasts the frame.

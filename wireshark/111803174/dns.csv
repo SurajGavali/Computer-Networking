@@ -1,0 +1,14 @@
+DNS query using host command
+
+Packet_number, Source_ip, Source_port, Destination_ip, Destination_port, Transaction_id, Flags, Query_type, Total_size_of_frame_sent_on_wire, Size_of_ip_header, Size_of_UDP_header, Answered_ip or Queried_host_name or Answered_CNAME
+
+6,192.168.43.12,39506,192.168.43.254,53,0x47ca,0x0100,A,74-bytes,20-bytes,40,www.iisc.ac.in
+6,192.168.43.12,58127,192.168.43.80,53,0x45aa,0x100,MX,86-bytes,20-bytes,52,mail.riseup.net
+
+nslookup and DNS
+mail-server is : iisc-ac-in.mail.protection.outlook.com
+
+Packet_number, Source_ip, Source_port, Destination_ip, Destination_port, Transaction_id, Flags, Query_type, Total_size_of_frame_sent_on_wire, Size_of_ip_header, Size_of_UDP_header, Answered_ip or Queried_host_name or Answered_CNAME
+
+1,10.0.2.15,58145,192.168.43.1,53,0x5c29,0x0109,MX,70-bytes,20-bytes,36,iisc.ac.in
+
